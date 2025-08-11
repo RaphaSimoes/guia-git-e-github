@@ -1,35 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
 
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+  --cell: 80px;      /* tamanho da célula (ícone + espaçamento) */
+  --icon: 65px;      /* tamanho do ícone em si */
+    --gap: 8px;
 }
-body{
-    /* Duas imagens sobrepostas */
-    background-image: url("img/github.png"), url("img/git.png");
 
-    /* Tamanho igual para manter o padrão */
-    background-size: 65px 65px, 65px 65px;
-    
+* { box-sizing: border-box; margin: 0; padding: 0}
 
-    /* Repetição em ambos */
-    background-repeat: repeat, repeat;
+html,body { height: 100%; }
 
-    /* Segunda imagem deslocada para intercalar */
-    background-position: 0 0, 35px 40px;
-    
-    background-size: 75px; 
-    background-color: rgb(9, 9, 9);
-    background-blend-mode: multiply;
+header, main, footer {
+    z-index: 15; /* conteúdo principal por cima de tudo */
+    position: relative; /* precisa para o z-index funcionar */
+}
 
+body {
+    min-height: 100vh;
+    background: #090909;
     font-family: "Rowdies", sans-serif;
-    color:#ffff;
-    place-content: center;
-    margin:0;
-    z-index: 0;
+    color: #fff;
+    position: relative;
+}
 
+.bg-pattern {
+     position: fixed; /* cobre a tela toda mesmo ao rolar */
+    inset: 0;
+    display: grid;
+    gap: var(--gap); 
+    align-items: center;
+    justify-items: center;
+    padding: 12px;
+  z-index: 10; /* atrás do conteúdo (o conteúdo terá z-index maior) */
+  pointer-events: auto; /* ícones recebem hover normalmente */
+}
+
+.bg-light {
+    z-index:0; /* camada de luz acima dos ícones */
+}
+
+.icon {
+    width: var(--icon);
+    height: var(--icon);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  opacity: 0.18;          /* valor entre 0 e 1, 0.18 = 18% */
+    cursor: default;
+}
+
+.icon:hover {
+    filter: brightness(1.18);
+    opacity: 1;
+
+}
+
+.github {
+    background-image: url("img/github.png");
+}
+
+.git {
+    background-image: url("img/git.png");
 }
 
 h1{
@@ -95,7 +126,7 @@ a{
     background-color: rgba(0, 0, 0, 0.711);
     display: none;
     align-items: center;
-    z-index: 999;
+    z-index: 5;
     position: fixed;
     top: 0;
     left: 0;
@@ -145,4 +176,6 @@ a{
     margin-bottom: 1rem;
     justify-items: center;
     flex-wrap: wrap;
+    z-index: 999;
+    position: relative;
 }
